@@ -1,0 +1,3 @@
+"boot_/kernel/Image/ramdisk/dev",16384,0,0,755
+"boot_/kernel/Image/ramdisk/dev/console",8192,0,0,600
+"boot_/kernel/Image/ramdisk/root",16384,0,0,700

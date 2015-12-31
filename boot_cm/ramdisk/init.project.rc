@@ -1,0 +1,16 @@
+# MTK project .rc configure
+on early-init
+
+on boot
+    # Refer to http://source.android.com/devices/tech/storage/index.html
+    # It said, "Starting in Android 4.4, multiple external storage devices are surfaced to developers through 
+    #           Context.getExternalFilesDirs(), Context.getExternalCacheDirs(), and Context.getObbDirs().
+    #           External storage devices surfaced through these APIs must be a semi-permanent part of the device (such as an SD card slot in a battery compartment).
+    #           Developers expect data stored in these locations to be available over long periods of time."
+    # Therefore, if the target has the SD card slot in a battery compartment, we need to specify SECONDARY_STORAGE (*** UN-Comment the following command ***)
+    #
+    # For mt6582_phone_qhd, the sd slot is blocked by battery. So we need to specify SECONDARY_STORAGE.
+    export SECONDARY_STORAGE /storage/sdcard1
+#
+# Connectivity related services (Begin)
+#

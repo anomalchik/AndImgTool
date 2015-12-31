@@ -1,0 +1,22 @@
+#!/sbin/busybox sh
+
+BB=/sbin/busybox
+
+cd /
+
+exec >>boot.txt 2>&1
+
+$BB echo "Mounting"
+$BB mkdir /tmp
+$BB mount -t tmpfs tmpfs /tmp
+$BB mount -t proc proc /proc
+
+$BB echo "Change SELinux mode to Permissive"
+$BB sed -e "s/fps\=5893/fps\=5893 androidboot\.selinux\=permissive/" /proc/cmdline > /tmp/cmdline
+$BB mount --bind -o ro /tmp/cmdline /proc/cmdline
+
+$BB echo "Starting init.."
+$BB chmod 755 /init2
+$BB mv /init2 /init
+exec /init
+
