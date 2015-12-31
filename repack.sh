@@ -71,6 +71,7 @@ CleanOut()
 	{
 	rm -r out
 	mkdir out
+	touch out/dontdelete
 	echo "Done!"
 		}
 Test()
