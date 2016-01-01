@@ -4,13 +4,23 @@
 #############  MADE BY ANOMALCHIK ###############
 #### Please don't hit me for this script :D  ####
 #################################################
-	
 
+
+# COLORS	
+CRED="\033[0;31m"
+CREDBOLD="\033[1;31m"
+CGREEN="\033[1;32m"
+CYELLOW="\033[1;33m"
+CBLUE="\033[1;34m"
+CNORMAL="\033[0m"
+
+# COUNT TEMPS
 fromstocknum=$(cat ait/stocknum.txt)
 fromcmnum=$(cat ait/cmnum.txt)
 fromsproutnum=$(cat ait/sproutnum.txt)
+
 # For TimeName variant
-time=$(date "+Date: %d.%m.%y and Time: %H:%M:%S")
+time=$CBLUE$(date "+Date: %d.%m.%y and Time: %H:%M:%S")
 
 
 # Need WINE!!
@@ -31,7 +41,7 @@ RepackStock()
 	
 	#after build zip	
 	$(echo $stockcnt > ait/stocknum.txt)
-	echo "Done!"
+	echo $CGREEN"Done!"
 		}
 RepackCM()
 	{
@@ -47,7 +57,7 @@ RepackCM()
 	cd ../
 	#after build zip
 	$(echo $cmcnt > ait/cmnum.txt)
-	echo "Done!"
+	echo $CGREEN"Done!"
 		}
 
 RepackSprout()
@@ -64,7 +74,7 @@ RepackSprout()
 	cd ../
 	#after build zip
 	$(echo $SproutCnt > ait/sproutnum.txt)
-	echo "Done!"
+	echo $CGREEN"Done!"
 		}
 
 CountsInfo()
@@ -75,27 +85,27 @@ CountsInfo()
 		}	
 CountsReset()
 	{
-	echo "Reset stock counter"
+	echo $CYELLOW"Reset stock counter"
 	echo 0 > ait/stocknum.txt
-	echo "==================="
-	echo "Done!"
-	echo "==================="
-	echo "Reset cm counter"
+	#echo $CGREEN"==================="
+	echo $CGREEN"Done!"
+	#echo $CGREEN"==================="
+	echo $CYELLOW"Reset cm counter"
 	echo 0 > ait/cmnum.txt
-	echo "==================="
-	echo "Done!"
-	echo "==================="
-	echo "Reset stock counter"
+	#echo $CGREEN"==================="
+	echo $CGREEN"Done!"
+	#echo $CGREEN"==================="
+	echo $CYELLOW"Reset stock counter"
 	echo 0 > ait/sproutnum.txt
-	echo "==================="
-	echo "Done!"
+	#echo $CGREEN"==================="
+	echo $CGREEN"Done!"$CNORMAL
 		}
 CleanOut()
 	{
 	rm -r out
 	mkdir out
 	touch out/.dontdelete
-	echo "Done!"
+	echo $CGREEN"Done!"
 		}
 Test()
 	{
@@ -103,20 +113,20 @@ Test()
 		}
 ######### MAIN MENU #########
 echo " "
-echo "Repack script by Anomalchik"
+echo $CREDBOLD"Repack script by Anomalchik"
 echo "Script Version 0.3a"
-echo "=================================="
-echo "Please run script from [wine cmd]"
+echo $CGREEN"=================================="$CNORMAL
+echo $CYELLOW"Please run script from [wine cmd]"
 echo "Usage example:"
 echo "repack.sh [param]"
-echo "=================================="
-echo "1 = Repack Stock boot" 
-echo "2 = Repack CM boot"
-echo "3 = Repack Sprout CM boot"
-echo "9 = Counts"
-echo "0 = Reset counts"
-echo "clean = clean out directory"
-echo "=================================="
+echo $CGREEN"=================================="$CNORMAL
+echo $CYELLOW"1"$CNORMAL" = Repack Stock boot" 
+echo $CYELLOW"2"$CNORMAL" = Repack CM boot"
+echo $CYELLOW"3"$CNORMAL" = Repack Sprout CM boot"
+echo $CYELLOW"9"$CNORMAL" = Counts"
+echo $CYELLOW"0"$CNORMAL" = Reset counts"
+echo $CYELLOW"clean"$CNORMAL" = clean out directory"
+echo $CGREEN"=================================="$CNORMAL
 
 ######### FUNCTINONAL ######### 
 case "$1" in
