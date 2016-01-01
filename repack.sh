@@ -71,6 +71,7 @@ CountsInfo()
 	{
 	echo "Stock count: $fromstocknum"
 	echo "CM count: $fromcmnum"	
+	echo "Sprout CM count: $fromsproutnum"
 		}	
 CountsReset()
 	{
@@ -84,12 +85,16 @@ CountsReset()
 	echo "==================="
 	echo "Done!"
 	echo "==================="
+	echo "Reset stock counter"
+	echo 0 > ait/sproutnum.txt
+	echo "==================="
+	echo "Done!"
 		}
 CleanOut()
 	{
 	rm -r out
 	mkdir out
-	touch out/dontdelete
+	touch out/.dontdelete
 	echo "Done!"
 		}
 Test()

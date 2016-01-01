@@ -71,6 +71,7 @@ CountsInfo()
 	{
 	echo "Stock count: $fromstocknum"
 	echo "CM count: $fromcmnum"	
+	echo "Sprout CM count: $fromsproutnum"
 		}	
 CountsReset()
 	{
@@ -89,7 +90,7 @@ CleanOut()
 	{
 	rm -r out
 	mkdir out
-	touch out/dontdelete
+	touch out/.dontdelete
 	echo "Done!"
 		}
 Test()
