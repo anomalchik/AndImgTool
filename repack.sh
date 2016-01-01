@@ -8,6 +8,7 @@
 
 fromstocknum=$(cat ait/stocknum.txt)
 fromcmnum=$(cat ait/cmnum.txt)
+fromsproutnum=$(cat ait/sproutnum.txt)
 # For TimeName variant
 time=$(date "+Date: %d.%m.%y and Time: %H:%M:%S")
 
@@ -46,6 +47,23 @@ RepackCM()
 	cd ../
 	#after build zip
 	$(echo $cmcnt > ait/cmnum.txt)
+	echo "Done!"
+		}
+
+RepackSprout()
+	{
+	SproutCnt=$(($fromsproutnum+1))
+	wine ait/ait.exe sprout_
+	# need press "Enter after repack"
+
+
+	# Build zip
+	mv new_boot.img bootzip/boot.img
+	cd bootzip
+	zip  -r ../out/boot_sproutcm$SproutCnt.zip ./
+	cd ../
+	#after build zip
+	$(echo $SproutCnt > ait/sproutnum.txt)
 	echo "Done!"
 		}
 
@@ -89,6 +107,7 @@ echo "repack.sh [param]"
 echo "=================================="
 echo "1 = Repack Stock boot" 
 echo "2 = Repack CM boot"
+echo "3 = Repack Sprout CM boot"
 echo "9 = Counts"
 echo "0 = Reset counts"
 echo "clean = clean out directory"
@@ -102,6 +121,10 @@ case "$1" in
 		;;
 	2)
 		RepackCM
+		exit
+		;;
+	3)
+		RepackSprout
 		exit
 		;;
 	9)	
