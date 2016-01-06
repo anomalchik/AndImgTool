@@ -19,6 +19,15 @@ fromstocknum=$(cat ait/stocknum.txt)
 fromcmnum=$(cat ait/cmnum.txt)
 fromsproutnum=$(cat ait/sproutnum.txt)
 
+# COUNT ALGORITM
+stockcnt=$(($fromstocknum+1))
+cmcnt=$(($fromcmnum+1))
+SproutCnt=$(($fromsproutnum+1))
+
+# BOOT NAMES
+stockbootname=boot_stock$stockcnt.zip
+mtkcmbootname=boot_cm$cmcnt.zip
+sproutcmbootname=boot_sproutcm$SproutCnt.zip
 # For TimeName variant
 time=$CBLUE$(date "+Date: %d.%m.%y and Time: %H:%M:%S")
 
@@ -28,7 +37,7 @@ time=$CBLUE$(date "+Date: %d.%m.%y and Time: %H:%M:%S")
 # boot_ - folder
 RepackStock()
 	{
-	stockcnt=$(($fromstocknum+1))
+	echo $CYELLOW"=====REPACK STOCK MTK BOOT====="$CNORMAL
 
 	wine ait/ait.exe boot_
 	# need press "Enter after repack"
@@ -36,16 +45,17 @@ RepackStock()
 	# Build zip
 	mv new_boot.img bootzip/boot.img
 	cd bootzip
-	zip  -r ../out/boot_stock$stockcnt.zip ./
+	zip  -r ../out/$stockbootname ./
 	cd ../
 	
 	#after build zip	
 	$(echo $stockcnt > ait/stocknum.txt)
 	echo $CGREEN"Done!"
+	echo $CYELLOW"boot name: $stockbootname"
 		}
 RepackCM()
 	{
-	cmcnt=$(($fromcmnum+1))
+	echo $CYELLOW"=====REPACK CM MTK 3.4 BOOT====="$CNORMAL
 	wine ait/ait.exe boot_cm
 	# need press "Enter after repack"
 
@@ -53,16 +63,17 @@ RepackCM()
 	# Build zip
 	mv new_boot.img bootzip/boot.img
 	cd bootzip
-	zip  -r ../out/boot_cm$cmcnt.zip ./
+	zip  -r ../out/$mtkcmbootname ./
 	cd ../
 	#after build zip
 	$(echo $cmcnt > ait/cmnum.txt)
 	echo $CGREEN"Done!"
+	echo $CYELLOW"boot name: $mtkcmbootname"
 		}
 
 RepackSprout()
 	{
-	SproutCnt=$(($fromsproutnum+1))
+	echo $CYELLOW"=====REPACK SPROUT CM BOOT====="$CNORMAL
 	wine ait/ait.exe sprout_
 	# need press "Enter after repack"
 
@@ -70,11 +81,12 @@ RepackSprout()
 	# Build zip
 	mv new_boot.img bootzip/boot.img
 	cd bootzip
-	zip  -r ../out/boot_sproutcm$SproutCnt.zip ./
+	zip  -r ../out/$sproutcmbootname ./
 	cd ../
 	#after build zip
 	$(echo $SproutCnt > ait/sproutnum.txt)
 	echo $CGREEN"Done!"
+	echo $CYELLOW"boot name: $sproutcmbootname"
 		}
 
 CountsInfo()
@@ -114,7 +126,8 @@ Test()
 ######### MAIN MENU #########
 echo " "
 echo $CREDBOLD"Repack script by Anomalchik"
-echo "Script Version 0.3a"
+echo "Script Version 0.4a"
+echo "Script use AndImgTool from 4PDA"
 echo $CGREEN"=================================="$CNORMAL
 echo $CYELLOW"Please run script from [wine cmd]"
 echo "Usage example:"
@@ -127,8 +140,11 @@ echo $CYELLOW"9"$CNORMAL" = Counts"
 echo $CYELLOW"0"$CNORMAL" = Reset counts"
 echo $CYELLOW"clean"$CNORMAL" = clean out directory"
 echo $CGREEN"=================================="$CNORMAL
+#echo -n "Enter Option: "
+#read opt
 
 ######### FUNCTINONAL ######### 
+#case $opt in
 case "$1" in
 	1)
 		RepackStock
